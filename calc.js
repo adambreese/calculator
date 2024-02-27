@@ -1,5 +1,35 @@
-const firstSelection = document.querySelector(".number");
-const secondSelection = document.querySelector(".number");
+const zero = document.querySelector("#0");
+const one = document.querySelector("#1");
+const two = document.querySelector("#2");
+const three = document.querySelector("#3");
+const four = document.querySelector("#4");
+const five = document.querySelector("#5");
+const six = document.querySelector("#6");
+const seven = document.querySelector("#7");
+const eight = document.querySelector("#8");
+const nine = document.querySelector("#9");
+
+const decimal = document.querySelector("#decimal");
+const operateBtn = document.querySelector("#operate");
+const addBtn = document.querySelector("#add");
+const subtractBtn = document.querySelector("#subtract");
+const multiplyBtn = document.querySelector("#multiply");
+const divideBtn = document.querySelector("#divide");
+const powerBtn = document.querySelector("#power");
+
+zero.addEventListener('click', () => {
+    if (!firstSelected) {
+        firstSelection += "0";
+    }
+})
+
+addBtn.addEventListener('click', () => {
+    if (!operatorSelected) {
+        firstSelected = true;
+        operator = "add";
+        operatorSelected = true;
+    }
+})
 
 const operate = function(firstNum, secondNum, operator) {
     switch (operator) {
