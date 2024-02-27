@@ -1,4 +1,5 @@
-
+const firstSelection = document.querySelector(".number");
+const secondSelection = document.querySelector(".number");
 
 const operate = function(firstNum, secondNum, operator) {
     switch (operator) {
