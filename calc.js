@@ -1,13 +1,13 @@
-const zero = document.querySelector("#0");
-const one = document.querySelector("#1");
-const two = document.querySelector("#2");
-const three = document.querySelector("#3");
-const four = document.querySelector("#4");
-const five = document.querySelector("#5");
-const six = document.querySelector("#6");
-const seven = document.querySelector("#7");
-const eight = document.querySelector("#8");
-const nine = document.querySelector("#9");
+const zero = document.querySelector("#zero");
+const one = document.querySelector("#one");
+const two = document.querySelector("#two");
+const three = document.querySelector("#three");
+const four = document.querySelector("#four");
+const five = document.querySelector("#five");
+const six = document.querySelector("#six");
+const seven = document.querySelector("#seven");
+const eight = document.querySelector("#eight");
+const nine = document.querySelector("#nine");
 
 const decimal = document.querySelector("#decimal");
 const operateBtn = document.querySelector("#operate");
@@ -17,9 +17,33 @@ const multiplyBtn = document.querySelector("#multiply");
 const divideBtn = document.querySelector("#divide");
 const powerBtn = document.querySelector("#power");
 
+let display = document.querySelector("#display");
+const clearBtn = document.querySelector("#clear");
+
+let firstSelected = false;
+let operatorSelected = false;
+let secondSelected = false;
+
+let firstSelection = 0;
+
+clearBtn.addEventListener('click', () => {
+    display.textContent =(0);
+})
+
 zero.addEventListener('click', () => {
-    if (!firstSelected) {
+    if (!firstSelected && firstSelection) {
         firstSelection += "0";
+        display.textContent = firstSelection;
+    }
+})
+
+one.addEventListener('click', () => {
+    if (!firstSelected) {
+        if (!firstSelection) {
+            firstSelection = "";
+        }
+        firstSelection += "1";
+        display.textContent = firstSelection;
     }
 })
 
@@ -28,6 +52,7 @@ addBtn.addEventListener('click', () => {
         firstSelected = true;
         operator = "add";
         operatorSelected = true;
+        display.textContent = (firstSelection + " + ");
     }
 })
 
