@@ -20,13 +20,14 @@ const powerBtn = document.querySelector("#power");
 let display = document.querySelector("#display");
 const clearBtn = document.querySelector("#clear");
 
+const numbers = document.querySelectorAll(".number");
+
 let firstSelected = false;
 let operatorSelected = false;
 let secondSelected = false;
 
-let firstSelection = 0;
+let firstSelection = "";
 let secondSelection = "";
-let lastEntry = "";
 
 clearBtn.addEventListener('click', () => {
     if (!operatorSelected) {
@@ -49,30 +50,28 @@ zero.addEventListener('click', () => {
     if (!firstSelected && firstSelection) {
         firstSelection += "0";
         display.textContent = firstSelection;
-        lastEntry = firstSelection;
     }
     if (!secondSelected && secondSelection) {
         secondSelection += "0";
         display.textContent = firstSelection + opDisplay + secondSelection;
-        lastEntry = secondSelection;
     }
 })
 
-one.addEventListener('click', () => {
-    if (!firstSelected) {
-        if (!firstSelection) {
-            firstSelection = "";
+numbers.forEach((number)=> {
+    number.addEventListener('click', () => {
+        if (!firstSelected) {
+            if (!firstSelection) {
+                firstSelection = "";
+            }
+            firstSelection += number.textContent;
+            display.textContent = firstSelection;
         }
-        firstSelection += "1";
-        display.textContent = firstSelection;
-        lastEntry = firstSelection;
-    }
-    else if (!secondSelected) {
-        secondSelection += "1";
-        display.textContent = firstSelection + opDisplay + secondSelection;
-        lastEntry = secondSelection;
-    }
-})
+        else if (!secondSelected) {
+            secondSelection += number.textContent;
+            display.textContent = firstSelection + opDisplay + secondSelection;
+        }
+    })
+});
 
 addBtn.addEventListener('click', () => {
     if (!operatorSelected) {
@@ -81,7 +80,52 @@ addBtn.addEventListener('click', () => {
         opDisplay = " + "
         operatorSelected = true;
         display.textContent = (firstSelection + opDisplay);
-        lastEntry = " + ";
+    }
+})
+
+subtractBtn.addEventListener('click', () => {
+    if (!operatorSelected) {
+        firstSelected = true;
+        operator = "subtract";
+        opDisplay = " - "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
+})
+
+multiplyBtn.addEventListener('click', () => {
+    if (!operatorSelected) {
+        firstSelected = true;
+        operator = "multiply";
+        opDisplay = " * "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
+})
+
+divideBtn.addEventListener('click', () => {
+    if (!operatorSelected) {
+        firstSelected = true;
+        operator = "divide";
+        opDisplay = " / "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
+})
+
+powerBtn.addEventListener('click', () => {
+    if (!operatorSelected) {
+        firstSelected = true;
+        operator = "power";
+        opDisplay = " ^ "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
+})
+
+operateBtn.addEventListener('click', () => {
+    if (firstSelected && operatorSelected && secondSelection) {
+        operate(Number(firstSelection), Number(secondSelection), operator);
     }
 })
 
