@@ -29,11 +29,17 @@ let secondSelected = false;
 let firstSelection = "";
 let secondSelection = "";
 
+let firstDec = false;
+let secondDec = false;
+
+let answer = 0;
+
 clearBtn.addEventListener('click', () => {
     if (!operatorSelected) {
         display.textContent = 0;
         firstSelection = 0;
         firstSelected = false;
+        firstDec = false;
     }
     else if (operatorSelected && !secondSelection) {
         display.textContent = firstSelection;
@@ -43,6 +49,20 @@ clearBtn.addEventListener('click', () => {
     else if (secondSelection) {
         display.textContent = firstSelection + opDisplay;
         secondSelection = "";
+        secondDec = false;
+    }
+})
+
+decimal.addEventListener('click', () => {
+    if (!firstSelected && !firstDec) {
+        firstSelection += decimal.textContent;
+        display.textContent = firstSelection;
+        firstDec = true;
+    }
+    else if (!secondSelected && !secondDec && operatorSelected) {
+        secondSelection += decimal.textContent;
+        display.textContent = firstSelection + opDisplay + secondSelection;
+        secondDec = true;
     }
 })
 
@@ -126,25 +146,33 @@ powerBtn.addEventListener('click', () => {
 operateBtn.addEventListener('click', () => {
     if (firstSelected && operatorSelected && secondSelection) {
         operate(Number(firstSelection), Number(secondSelection), operator);
+        display.textContent = answer;
+        firstSelection = answer;
+        firstSelected = false;
+        secondSelection = "";
+        secondSelected = false;
+        operatorSelected = false;
+        operator = "";
+        opDisplay = "";
     }
 })
 
 const operate = function(firstNum, secondNum, operator) {
     switch (operator) {
         case "add":
-            console.log(add(firstNum, secondNum));
+            answer = add(firstNum, secondNum);
             break;
         case "subtract":
-            console.log(subtract(firstNum, secondNum));
+            answer = subtract(firstNum, secondNum);
             break;
         case "multiply":
-            console.log(multiply(firstNum, secondNum));
+            answer = multiply(firstNum, secondNum);
             break;
         case "divide":
-            console.log(divide(firstNum, secondNum));
+            answer = divide(firstNum, secondNum);
             break;
         case "power":
-            console.log(power(firstNum, secondNum));
+            answer = power(firstNum, secondNum);
             break;
     }
 };
