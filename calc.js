@@ -25,6 +25,7 @@ let operatorSelected = false;
 let secondSelected = false;
 
 let firstSelection = 0;
+let secondSelection = "";
 let lastEntry = "";
 
 clearBtn.addEventListener('click', () => {
@@ -33,10 +34,14 @@ clearBtn.addEventListener('click', () => {
         firstSelection = 0;
         firstSelected = false;
     }
-    else if (operatorSelected) {
+    else if (operatorSelected && !secondSelection) {
         display.textContent = firstSelection;
         operatorSelected = false;
         firstSelected = false;
+    }
+    else if (secondSelection) {
+        display.textContent = firstSelection + opDisplay;
+        secondSelection = "";
     }
 })
 
@@ -45,6 +50,11 @@ zero.addEventListener('click', () => {
         firstSelection += "0";
         display.textContent = firstSelection;
         lastEntry = firstSelection;
+    }
+    if (!secondSelected && secondSelection) {
+        secondSelection += "0";
+        display.textContent = firstSelection + opDisplay + secondSelection;
+        lastEntry = secondSelection;
     }
 })
 
@@ -57,14 +67,20 @@ one.addEventListener('click', () => {
         display.textContent = firstSelection;
         lastEntry = firstSelection;
     }
+    else if (!secondSelected) {
+        secondSelection += "1";
+        display.textContent = firstSelection + opDisplay + secondSelection;
+        lastEntry = secondSelection;
+    }
 })
 
 addBtn.addEventListener('click', () => {
     if (!operatorSelected) {
         firstSelected = true;
         operator = "add";
+        opDisplay = " + "
         operatorSelected = true;
-        display.textContent = (firstSelection + " + ");
+        display.textContent = (firstSelection + opDisplay);
         lastEntry = " + ";
     }
 })
