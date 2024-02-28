@@ -25,15 +25,26 @@ let operatorSelected = false;
 let secondSelected = false;
 
 let firstSelection = 0;
+let lastEntry = "";
 
 clearBtn.addEventListener('click', () => {
-    display.textContent =(0);
+    if (!operatorSelected) {
+        display.textContent = 0;
+        firstSelection = 0;
+        firstSelected = false;
+    }
+    else if (operatorSelected) {
+        display.textContent = firstSelection;
+        operatorSelected = false;
+        firstSelected = false;
+    }
 })
 
 zero.addEventListener('click', () => {
     if (!firstSelected && firstSelection) {
         firstSelection += "0";
         display.textContent = firstSelection;
+        lastEntry = firstSelection;
     }
 })
 
@@ -44,6 +55,7 @@ one.addEventListener('click', () => {
         }
         firstSelection += "1";
         display.textContent = firstSelection;
+        lastEntry = firstSelection;
     }
 })
 
@@ -53,6 +65,7 @@ addBtn.addEventListener('click', () => {
         operator = "add";
         operatorSelected = true;
         display.textContent = (firstSelection + " + ");
+        lastEntry = " + ";
     }
 })
 
