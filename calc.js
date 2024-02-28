@@ -101,10 +101,26 @@ addBtn.addEventListener('click', () => {
         operatorSelected = true;
         display.textContent = (firstSelection + opDisplay);
     }
+    else {
+        pressOperate();
+        firstSelected = true;
+        operator = "add";
+        opDisplay = " + "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
 })
 
 subtractBtn.addEventListener('click', () => {
     if (!operatorSelected) {
+        firstSelected = true;
+        operator = "subtract";
+        opDisplay = " - "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
+    else {
+        pressOperate();
         firstSelected = true;
         operator = "subtract";
         opDisplay = " - "
@@ -121,10 +137,26 @@ multiplyBtn.addEventListener('click', () => {
         operatorSelected = true;
         display.textContent = (firstSelection + opDisplay);
     }
+    else {
+        pressOperate();
+        firstSelected = true;
+        operator = "multipy";
+        opDisplay = " * "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
 })
 
 divideBtn.addEventListener('click', () => {
     if (!operatorSelected) {
+        firstSelected = true;
+        operator = "divide";
+        opDisplay = " / "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
+    else {
+        pressOperate();
         firstSelected = true;
         operator = "divide";
         opDisplay = " / "
@@ -141,9 +173,21 @@ powerBtn.addEventListener('click', () => {
         operatorSelected = true;
         display.textContent = (firstSelection + opDisplay);
     }
+    else {
+        pressOperate();
+        firstSelected = true;
+        operator = "power";
+        opDisplay = " ^ "
+        operatorSelected = true;
+        display.textContent = (firstSelection + opDisplay);
+    }
 })
 
 operateBtn.addEventListener('click', () => {
+    pressOperate();
+})
+
+const pressOperate = function() {
     if (firstSelected && operatorSelected && secondSelection) {
         operate(Number(firstSelection), Number(secondSelection), operator);
         display.textContent = answer;
@@ -155,7 +199,7 @@ operateBtn.addEventListener('click', () => {
         operator = "";
         opDisplay = "";
     }
-})
+}
 
 const operate = function(firstNum, secondNum, operator) {
     switch (operator) {
