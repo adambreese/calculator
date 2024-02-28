@@ -19,6 +19,7 @@ const powerBtn = document.querySelector("#power");
 
 let display = document.querySelector("#display");
 const clearBtn = document.querySelector("#clear");
+const wipeBtn = document.querySelector("#wipe");
 
 const numbers = document.querySelectorAll(".number");
 
@@ -26,7 +27,7 @@ let firstSelected = false;
 let operatorSelected = false;
 let secondSelected = false;
 
-let firstSelection = "";
+let firstSelection = 0;
 let secondSelection = "";
 
 let firstDec = false;
@@ -34,6 +35,22 @@ let secondDec = false;
 
 let answer = 0;
 
+wipeBtn.addEventListener('click', () => {
+    answer = 0;
+    display.textContent = 0;
+    firstSelection = 0;
+    firstSelected = false;
+
+    secondSelection = "";
+    secondSelected = false;
+
+    operatorSelected = false;
+    operator = "";
+    opDisplay = "";
+
+    firstDec = false;
+    secondDec = false;
+})
 clearBtn.addEventListener('click', () => {
     if (!operatorSelected) {
         display.textContent = 0;
